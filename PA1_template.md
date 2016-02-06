@@ -1,4 +1,7 @@
-# Reproducible Research: Peer Assessment 1
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
 
 ###Loading and preprocessing the data
 
@@ -34,7 +37,7 @@ ggplot(as.data.frame(day_sum), aes(day_sum)) + geom_histogram(binwidth=2000) + t
 ## Warning: Removed 8 rows containing non-finite values (stat_bin).
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
 **Calculate and report the mean and median of the total number of steps taken per day**
 
@@ -67,7 +70,7 @@ ggplot(as.data.frame(interval_means), aes(x=as.numeric(row.names(interval_means)
     theme_minimal()
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
 
 **Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
@@ -117,7 +120,7 @@ newday_sum <- tapply(newdata$steps, newdata$date, sum)
 ggplot(as.data.frame(newday_sum), aes(newday_sum)) + geom_histogram(binwidth=2000) + theme_minimal()
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
 
 ```r
 mean(newday_sum, na.rm=TRUE)
@@ -142,7 +145,7 @@ The mean number of steps over intervals is of course not affected by substitutin
 ```r
 newdata$weekday <- weekdays(newdata$date)
 day_means <- tapply(newdata$steps, newdata$weekday, FUN=mean, na.rm=TRUE)
-weekend_days <- (newdata$weekday == "lÃ¸rdag" | newdata$weekday == "sÃ¸ndag")
+weekend_days <- (newdata$weekday == "lørdag" | newdata$weekday == "søndag")
 newdata$weekend[weekend_days] <- "Weekend"
 newdata$weekend[!weekend_days] <- "Weekday"
 ```
@@ -158,4 +161,4 @@ ggplot(newdata, aes(x=interval, y=steps)) +
     theme_minimal()
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
